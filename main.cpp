@@ -43,71 +43,71 @@ int findMaxUnits(const int a[], int lastPlantNumber);
 
 int main()
 {
-	int plant[NUMBER_OF_PLANTS];
+    int plant[NUMBER_OF_PLANTS];
 
-	cout<<"This program displays a graph showing\n"
-		<<"production for each plant in the company.\n";
+    cout<<"This program displays a graph showing\n"
+        <<"production for each plant in the company.\n";
 
-	inputData(plant, NUMBER_OF_PLANTS);
-	scale(plant, NUMBER_OF_PLANTS);
-	graph(plant, NUMBER_OF_PLANTS);
+    inputData(plant, NUMBER_OF_PLANTS);
+    scale(plant, NUMBER_OF_PLANTS);
+    graph(plant, NUMBER_OF_PLANTS);
 
-	return 0;
+    return 0;
 }
 
 void inputData(int a[], int lastPlantNumber)
 {
-	for (int plantNumber = 1; plantNumber <= lastPlantNumber; plantNumber++)
-	{
-		cout<<"\nEnter production data for plant number "<<plantNumber<<"\n";
-		getTotal(a[plantNumber - 1]);
-	}
+    for (int plantNumber = 1; plantNumber <= lastPlantNumber; plantNumber++)
+    {
+        cout<<"\nEnter production data for plant number "<<plantNumber<<"\n";
+        getTotal(a[plantNumber - 1]);
+    }
 }
 
 void getTotal(int& totalUnits)
 {
-	cout<<"Enter number of units produced by each department.\n";
-	
-	int units;
+    cout<<"Enter number of units produced by each department.\n";
+
+    int units;
 
     do
-	{
-		cin>>units;
+    {
+        cin>>units;
         totalUnits += units;
-	}while(cin.peek() != '\n');
+    }while(cin.peek() != '\n');
 
-	cout<<"Total = "<<totalUnits<<endl;
+    cout<<"Total = "<<totalUnits<<endl;
 }
 
 void scale (int a[], int lastPlantNumber)
 {
-	for (int i = 0; i < lastPlantNumber; i++)
+    for (int i = 0; i < lastPlantNumber; i++)
         a[i] = roundNumber(a[i]/1000.0);
 }
 
 int roundNumber(double number)
 {
-	return static_cast<int>(floor(number + 0.5));
+    return static_cast<int>(floor(number + 0.5));
 }
 
 void graph(const int a[], int lastPlantNumber)
 {
     int maxUnits = findMaxUnits(a, lastPlantNumber);
 
-	cout<<"\nUnits produced in thousands of units:\n\n";
-	for (int i = maxUnits; i >= 1; i--)
-	{
-		for (int j = 0; j < lastPlantNumber; j++)
+    cout<<"\nUnits produced in thousands of units:\n\n";
+    for (int i = maxUnits; i >= 1; i--)
+    {
+        for (int j = 0; j < lastPlantNumber; j++)
         {
             cout<<setw(15);
-			if (a[j] >= i)
+            if (a[j] >= i)
                 cout<<'*';
             else
                 cout<<' ';
         }
         cout<<endl;
-	}
-    
+    }
+
     cout<<setw(22)<<"Plant #1";
     for (int i = 1; i < lastPlantNumber; i++)
         cout<<setw(14)<<"Plant #"<<i + 1;
